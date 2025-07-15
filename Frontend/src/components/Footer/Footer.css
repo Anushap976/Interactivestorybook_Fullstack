@@ -1,0 +1,14 @@
+.storybook-footer {
+  background-color: #f3e8ff;
+  text-align: center;
+  padding: 2rem 1rem;
+  font-family: 'Arial', sans-serif;
+  font-size: 1rem;
+  color: #333;
+  border-top: 3px solid #c3f3d6;
+}
+
+.storybook-footer p {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}

@@ -1,0 +1,233 @@
+/* Container for storybook page with padding and centered text */
+.storybook-container {
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Remove default list styles for story list */
+.story-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Each story preview item styling */
+.story-list-item {
+  background: #fdf9ff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Hover effect: slight scale-up and background color change */
+.story-list-item:hover {
+  transform: scale(1.05);
+  background: #f7e1f5;
+}
+
+/* Title styling inside story preview */
+.story-list-item h3 {
+  margin: 0 0 0.5rem;
+  color: #6a0dad; /* Purple color */
+}
+
+/* Author name styling */
+.story-list-item .author {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+/* Summary text color */
+.story-list-item .summary {
+  color: #333;
+}
+
+/* Scrollable box for story content with max height */
+.story-scroll-box {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 1rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar on WebKit browsers */
+.story-scroll-box::-webkit-scrollbar {
+  display: none;
+}
+
+/* Story image inside scroll box */
+.story-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  object-fit: cover;
+}
+
+/* Paragraph text for story content */
+.story-text {
+  text-align: left;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #333;
+  white-space: pre-wrap; /* Preserve whitespace and line breaks */
+}
+
+/* Container for detailed story view */
+.story-detail {
+  max-width: 1500px;
+  margin: auto;
+  text-align: center;
+  background: #fffdf7;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Specific image styling in detail view */
+.story-detail img {
+  max-width: 300px; /* fixed max width */
+  height: auto;
+  border-radius: 8px;
+  margin: 1rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Scrollable story content */
+.story-content {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 10px;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  scroll-behavior: smooth;
+}
+
+/* Container for navigation buttons below story */
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+/* Comment section styling */
+.comment-section {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #f9f4ff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(106, 13, 173, 0.1);
+}
+
+/* Comment section heading styling */
+.comment-section h3 {
+  margin-bottom: 0.5rem;
+  color: #6a0dad;
+  text-align: left;
+}
+
+/* Textarea input for comments */
+.comment-section textarea {
+  width: 98%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  margin-bottom: 0.8rem;
+  font-family: 'Georgia', serif;
+}
+
+/* List of comments container */
+.comments-list {
+  margin-top: 1rem;
+}
+
+/* Each individual comment style */
+.comment-item {
+  background: #fff;
+  padding: 0.6rem;
+  border-left: 4px solid #6a0dad;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+  text-align: left;
+}
+
+/* Fade-in animation for smooth content entrance */
+.fade-in {
+  animation: fadeIn 0.6s ease-in-out both;
+}
+
+.narration-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.narration-buttons button {
+  background: #b47cd0;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(106, 13, 173, 0.2);
+  transition: background-color 0.3s, transform 0.2s;
+  display: inline-block;
+}
+
+.narration-buttons button:hover:not(:disabled) {
+  background: #9c5bb7;
+  transform: scale(1.1);
+}
+
+.narration-buttons button:disabled {
+  background: #e3d4ec;
+  cursor: not-allowed;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive font size adjustment for smaller screens */
+@media screen and (max-width: 768px) {
+  .story-content {
+    font-size: 1rem;
+  }
+}
+
+/* Responsive layout adjustment for story body (likely flex container) */
+@media screen and (max-width: 768px) {
+  .story-body {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .story-body img {
+    max-width: 100%;
+  }
+
+  .story-body .story-content {
+    text-align: left;
+  }
+}

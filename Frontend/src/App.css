@@ -1,0 +1,18 @@
+
+/* Make the app container full height and use flexbox */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Let main content take up all space between header and footer */
+.main-content {
+  flex: 1;
+}
+

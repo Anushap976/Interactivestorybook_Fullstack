@@ -1,0 +1,137 @@
+.about-container {
+  padding: 2rem;
+  max-width: 960px;
+  margin: 0 auto;
+  font-family: 'Georgia', serif;
+  line-height: 1.7;
+  color: #333;
+  background-color: #fffafc;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+/* Mission Section */
+.about-mission h3 {
+  color: #6a0dad;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.about-mission p {
+  font-size: 1.15rem;
+  margin-bottom: 1.2rem;
+}
+
+.about-mission ul {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 1.5rem;
+}
+
+.about-mission ul li {
+  margin-bottom: 0.8rem;
+  padding-left: 1.8rem;
+  position: relative;
+  font-size: 1.05rem;
+}
+
+.about-mission ul li::before {
+  content: '⭐';
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  font-size: 1rem;
+  color: #6a0dad;
+}
+
+/* Story Table Section */
+.about-stories h3 {
+  margin-top: 3rem;
+  font-size: 1.9rem;
+  color: #333;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.story-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  background-color: #faf6ff;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.story-table thead {
+  background-color: #6a0dad;
+  color: white;
+}
+
+.story-table th,
+.story-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e0d6ec;
+}
+
+.story-table tr:hover {
+  background-color: #f3ecfb;
+  transition: background-color 0.2s ease;
+}
+
+.story-table th {
+  font-weight: bold;
+  font-size: 1.05rem;
+}
+
+.story-table td {
+  font-size: 1rem;
+}
+
+.coming-soon {
+  margin-top: 1.2rem;
+  font-style: italic;
+  color: #6a0dad;
+  font-size: 1rem;
+  text-align: center;
+  background-color: #f9f1ff;
+  padding: 0.6rem;
+  border-radius: 6px;
+}
+
+.story-table td:first-child {
+  cursor: pointer;
+}
+
+.about-image {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 10px;
+  margin: 2rem auto;
+  display: block;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.about-quote {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  text-align: center;
+  color: #6a0dad;
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  .about-container {
+    padding: 1rem;
+  }
+
+  .story-table th,
+  .story-table td {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  .about-image {
+    max-width: 100%;
+  }
+}

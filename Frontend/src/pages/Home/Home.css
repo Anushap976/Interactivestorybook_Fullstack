@@ -1,0 +1,139 @@
+.home-container {
+  padding: 2rem;
+  background: linear-gradient(135deg, #fffafc 0%, #f4e9ff 100%);
+  min-height: 60vh;
+}
+
+.home-content {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.home-text {
+  flex: 1;
+  font-family: 'Georgia', serif;
+}
+
+.home-text h2 {
+  font-size: 2rem;
+  color: #6a0dad;
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+}
+
+.home-text h2::after {
+  content: "";
+  display: block;
+  width: 60%;
+  height: 3px;
+  background: #d4af37;
+  /* gold accent */
+  margin-top: 0.3rem;
+  border-radius: 3px;
+}
+
+.home-text p {
+  font-size: 1.1rem;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.explore-btn {
+  padding: 0.75rem 2rem;
+  background: linear-gradient(to right, #6a0dad, #8a2be2);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.explore-btn:hover {
+  background: linear-gradient(to right, #8a2be2, #6a0dad);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.home-image {
+  flex: 1;
+  text-align: center;
+}
+
+.home-image img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.home-image img:hover {
+  transform: scale(1.05) rotate(-1deg);
+}
+
+.quote-of-the-day {
+  margin-top: 2rem;
+  padding: 1.5rem 2rem;
+  border: 3px double #d4af37;
+  background: #fff8e7;
+  font-family: 'Georgia', serif;
+  font-size: 1.1rem;
+  color: #4b0082;
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  border-radius: 12px;
+  animation: fadeInQuote 1s ease-in-out;
+}
+
+.quote-of-the-day::before {
+  content: "📜 Quote of the Day";
+  position: absolute;
+  top: -1.2rem;
+  left: 1rem;
+  background: #fff8e7;
+  padding: 0 0.5rem;
+  font-weight: bold;
+  color: #6a0dad;
+}
+
+@keyframes fadeInQuote {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .home-content {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .home-image img {
+    max-width: 100%;
+    height: auto;
+  }
+}
