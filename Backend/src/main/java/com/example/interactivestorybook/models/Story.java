@@ -24,5 +24,54 @@ public class Story {
     @OneToMany(mappedBy = "story", cascade = CascadeType.ALL)
     private List<StoryReview> reviews;
 
+    // Getters and Setters
+
+    public Long getStoryId() {
+        return storyId;
+    }
+
+    public void setStoryId(Long storyId) {
+        this.storyId = storyId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getNarrative() {
+        return narrative;
+    }
+
+    public void setNarrative(String narrative) {
+        this.narrative = narrative;
+    }
+
+    public LocalDate getPublishedDt() {
+        return publishedDt;
+    }
+
+    public void setPublishedDt(LocalDate publishedDt) {
+        this.publishedDt = publishedDt;
+    }
+
+    public List<StoryReview> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<StoryReview> reviews) {
+        this.reviews = reviews;
+    }
 
 }
