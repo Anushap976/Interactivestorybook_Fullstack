@@ -2,6 +2,8 @@ package com.example.interactivestorybook.models;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "story_review")
 public class StoryReview {
@@ -10,23 +12,67 @@ public class StoryReview {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;
 
-    @Lob
-    private String comments;
+    private String comment;
 
-    // The user who wrote the review
+    private int rating;
+
+    private LocalDate reviewDate;
+
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
-    // The story this review belongs to
     @ManyToOne
-    @JoinColumn(name = "story_id", nullable = false)
+    @JoinColumn(name = "story_id")
     private Story story;
 
-    // Parent review for nested/threaded replies
-    @ManyToOne
-    @JoinColumn(name = "parent_review_id")
-    private StoryReview parentReview;
+    // --- Getters and Setters ---
 
+    public Long getReviewId() {
+        return reviewId;
+    }
 
+    public void setReviewId(Long reviewId) {
+        this.reviewId = reviewId;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public LocalDate getReviewDate() {
+        return reviewDate;
+    }
+
+    public void setReviewDate(LocalDate reviewDate) {
+        this.reviewDate = reviewDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Story getStory() {
+        return story;
+    }
+
+    public void setStory(Story story) {
+        this.story = story;
+    }
 }
