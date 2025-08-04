@@ -6,6 +6,9 @@ import About from './pages/About/About';
 import Home from './pages/Home/Home';
 import StoryBook from './pages/StoryBook/StoryBook';
 import Feedback from './pages/Feedback/Feedback';
+import Login from './pages/Login/Login';
+import Signup from './pages/Signup/Signup';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
 
@@ -19,7 +22,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/storybook" element={<StoryBook />} />
-            <Route path="/feedback" element={<Feedback />} />
+            <Route path="/feedback" element={<ProtectedRoute element={<Feedback />} />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
           </Routes>
         </main>
         <Footer />
