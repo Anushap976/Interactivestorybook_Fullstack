@@ -48,7 +48,9 @@ const Header = () => {
           <li><NavLink to="/" className={({ isActive }) => isActive ? 'active-link' : ''}>Home</NavLink></li>
           <li><NavLink to="/about" className={({ isActive }) => isActive ? 'active-link' : ''}>About</NavLink></li>
           <li><NavLink to="/storybook" className={({ isActive }) => isActive ? 'active-link' : ''}>StoryBook</NavLink></li>
+          <li><NavLink to="/create-story" className={({ isActive }) => isActive ? 'active-link' : ''}>Create Your Story</NavLink></li>
           <li><NavLink to="/feedback" className={({ isActive }) => isActive ? 'active-link' : ''}>Feedback</NavLink></li>
+
         </ul>
       </nav>
 
@@ -58,7 +60,9 @@ const Header = () => {
           <li><NavLink to="/" className={({ isActive }) => isActive ? 'active-link' : ''}>Home</NavLink></li>
           <li><NavLink to="/about" className={({ isActive }) => isActive ? 'active-link' : ''}>About</NavLink></li>
           <li><NavLink to="/storybook" className={({ isActive }) => isActive ? 'active-link' : ''}>StoryBook</NavLink></li>
+          <li><NavLink to="/create-story" className={({ isActive }) => isActive ? 'active-link' : ''}>Create Your Story</NavLink></li>
           <li><NavLink to="/feedback" className={({ isActive }) => isActive ? 'active-link' : ''}>Feedback</NavLink></li>
+
           <li>
             {isLoggedIn ? (
               <button className="logout-button" onClick={handleLogout}>Logout</button>
