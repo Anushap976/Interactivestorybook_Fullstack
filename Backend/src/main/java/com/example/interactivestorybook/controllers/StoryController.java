@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/userstories")
-@CrossOrigin(origins = "http://localhost:3000")  // Adjust this to your frontend origin
+@CrossOrigin(origins = "http://localhost:3000")
 public class StoryController {
 
     @Autowired
@@ -42,7 +42,6 @@ public class StoryController {
             story.setTitle(updatedStory.getTitle());
             story.setAuthor(updatedStory.getAuthor());
             story.setNarrative(updatedStory.getNarrative());
-            // keep publishedDt as is or update here if you want
             return storyRepository.save(story);
         }).orElse(null);
     }
