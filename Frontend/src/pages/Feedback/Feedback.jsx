@@ -1,83 +1,96 @@
-import { useState } from 'react';
-import './Feedback.css'
+import React, { useState } from 'react';
+import './Feedback.css';
 import Button from "../../components/Button";
 
 const Feedback = () => {
-    // State to store input values from the form
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        message: ''
-    });
-    // State to track whether feedback was submitted
-    const [submitted, setSubmitted] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
 
-    // Update formData state as user types
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setError('Please fill in all fields.');
+      return;
     }
 
-    // Handle form submission
-    const handleSubmit = (e) => {
-        e.preventDefault();       // Prevent page reload
-        setSubmitted(true);
-        setFormData({ name: '', email: '', message: '' });
+    try {
+      const res = await fetch('http://localhost:8080/api/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(text || `HTTP ${res.status}`);
+      }
+
+      setSubmitted(true);
+      setFormData({ name: '', email: '', message: '' });
+    } catch (err) {
+      console.error(err);
+      setError('Unable to submit feedback right now.');
     }
+  };
 
-    return (
-        <div className="feedback-page-background">
-            <div className='feedback-container'>
-                {!submitted && <h2>We would love your feedback!</h2>}
-                {/* Conditional rendering: thank-you message or form */}
-                {submitted ? (
-                    <p className="feedback-success">Thank you for your feedback! ✨</p>
-                ) : (
-                    <form className="feedback-form" onSubmit={handleSubmit}>
-                        {/* Name input */}
-                        <label>
-                            Name:
-                            <input
-                                type="text"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                placeholder="Enter your name"
-                                required
-                            />
-                        </label>
-
-                        {/* Email input */}
-                        <label>
-                            Email:
-                            <input
-                                type="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                placeholder="Enter your email"
-                                required
-                            />
-                        </label>
-
-                        {/* Message textarea */}
-                        <label>
-                            Message:
-                            <textarea
-                                name="message"
-                                value={formData.message}
-                                rows="8"
-                                onChange={handleChange}
-                                placeholder="Share your thoughts with us..."
-                                required
-                            />
-                        </label>
-
-                        {/* Submit using reusable button component */}
-                        <Button text="Send feedback" type="submit" />
-                    </form>
-                )}
-            </div>
+  return (
+    <div className="feedback-container">
+      <h2>Feedback</h2>
+      {submitted ? (
+        <div className="feedback-success">
+          Thank you! Your feedback was submitted.
+          <Button text="Submit another" onClick={() => setSubmitted(false)} />
         </div>
-    )
-}
+      ) : (
+        <form className="feedback-form" onSubmit={handleSubmit}>
+          {error && <div className="feedback-error">{error}</div>}
+          <div className="form-group">
+            <label>Name</label>
+            <input
+              className="feedback-input"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Email</label>
+            <input
+              className="feedback-input"
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Message</label>
+            <textarea
+              className="feedback-textarea"
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              rows={4}
+              required
+            />
+          </div>
+
+          <Button text="Send Feedback" type="submit" />
+        </form>
+      )}
+    </div>
+  );
+};
+
 export default Feedback;
