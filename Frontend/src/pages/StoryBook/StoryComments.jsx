@@ -1,46 +1,100 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '../../components/Button';
 
-const StoryComments = ({ storyId }) => {
-    // State to hold all comments keyed by storyId
-    const [comments, setComments] = useState({});
-    // State to hold the currently typed new comment
-    const [newComment, setNewComment] = useState('');
+const API_BASE = 'http://localhost:8080';
 
-    // Handler to add a new comment to the current story's comment list
-    const handleAdd = () => {
-        if (!newComment.trim()) return;
+const StoryComments = ({ storyId, storyTitle }) => {
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState('');
+  const [error, setError] = useState('');
 
-        // Create updated comments object with new comment appended
-        const updated = {
-            ...comments,
-            [storyId]: [...(comments[storyId] || []), newComment],
-        };
-        setComments(updated);
-        setNewComment('');
-    };
+  const load = async () => {
+    setError('');
+    try {
+      let url;
+      if (storyId) {
+        url = `${API_BASE}/api/story-reviews?storyId=${encodeURIComponent(storyId)}`;
+      } else {
+        // Fallback: load all and filter by title on client
+        url = `${API_BASE}/api/story-reviews`;
+      }
 
-    return (
-        <div className="comment-section">
-            <h3>💬 Share your thoughts</h3>
-            {/* Textarea for new comment input */}
-            <textarea
-                rows="3"
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-                placeholder="Write your comment here..."
-            />
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`GET failed: ${res.status}`);
+      const data = await res.json();
 
-             {/* Reusable Button component to post the comment */}
-            <Button text="Post Comment" onClick={handleAdd} />
-            {/* List existing comments for this story */}
-            <div className="comments-list">
-                {(comments[storyId] || []).map((comment, i) => (
-                    <p key={i} className="comment-item">📝 {comment}</p>
-                ))}
+      let filtered = Array.isArray(data) ? data : [];
+      if (!storyId && storyTitle) {
+        filtered = filtered.filter(r =>
+          r.story && typeof r.story.title === 'string' &&
+          r.story.title.toLowerCase() === storyTitle.toLowerCase()
+        );
+      }
+
+      setComments(filtered);
+    } catch (e) {
+      console.error(e);
+      setError('Could not load comments.');
+    }
+  };
+
+  useEffect(() => { if (storyId) load(); }, [storyId]);
+
+  const add = async () => {
+    if (!newComment.trim()) return;
+    setError('');
+    try {
+      const payload = {
+        comment: newComment.trim(),
+        ...(storyId ? { storyId } : {}),
+        ...(storyTitle ? { title: storyTitle } : {})
+      };
+
+      const res = await fetch(`${API_BASE}/api/story-reviews`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });      if (!res.ok) {
+        const txt = await res.text();
+        throw new Error(`POST failed: ${res.status} ${txt}`);
+      }
+      setNewComment('');
+      load();
+    } catch (e) {
+      console.error(e);
+      setError('Unable to post comment.');
+    }
+  };
+
+  return (
+    <div className="comment-section">
+      <h4>Comments</h4>
+      {error && <div className="comments-error">{error}</div>}
+
+      <div className="comment-form">
+        <textarea
+          className="comment-textarea"
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
+          placeholder="Write a comment..."
+          rows={3}
+        />
+        <Button text="Post" onClick={add} />
+      </div>
+
+      <div className="comments-list">
+        {comments.length === 0 ? (
+          <p>No comments yet.</p>
+        ) : (
+          comments.map((c) => (
+            <div key={(c.id ?? c.reviewId)}>
+              <p>{c.comment}</p>
             </div>
-        </div>
-    );
+          ))
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default StoryComments;
