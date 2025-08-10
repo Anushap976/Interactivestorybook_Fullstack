@@ -1,45 +1,53 @@
 package com.example.interactivestorybook.controllers;
 
-
 import com.example.interactivestorybook.models.Story;
 import com.example.interactivestorybook.repositories.StoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/stories")
+@RequestMapping("/api/userstories")
+@CrossOrigin(origins = "http://localhost:3000")  // Adjust this to your frontend origin
 public class StoryController {
 
     @Autowired
-    StoryRepository storyRepository;
+    private StoryRepository storyRepository;
 
+    // CREATE a new story
+    @PostMapping
+    public Story createStory(@RequestBody Story story) {
+        story.setPublishedDt(LocalDate.now());
+        return storyRepository.save(story);
+    }
+
+    // READ all stories
     @GetMapping
     public List<Story> getAllStories() {
         return storyRepository.findAll();
     }
 
+    // READ single story by ID
     @GetMapping("/{id}")
     public Story getStoryById(@PathVariable Long id) {
-        return storyRepository.findById(id).orElseThrow(() -> new RuntimeException("Story not found"));
+        return storyRepository.findById(id).orElse(null);
     }
 
-    @PostMapping
-    public Story createStory(@RequestBody Story story) {
-        return storyRepository.save(story);
-    }
-
+    // UPDATE a story
     @PutMapping("/{id}")
-    public Story updateStory(@PathVariable Long id, @RequestBody Story storyDetails) {
-        Story story = storyRepository.findById(id).orElseThrow(() -> new RuntimeException("Story not found"));
-        story.setTitle(storyDetails.getTitle());
-        story.setAuthor(storyDetails.getAuthor());
-        story.setNarrative(storyDetails.getNarrative());
-        story.setPublishedDt(storyDetails.getPublishedDt());
-        return storyRepository.save(story);
+    public Story updateStory(@PathVariable Long id, @RequestBody Story updatedStory) {
+        return storyRepository.findById(id).map(story -> {
+            story.setTitle(updatedStory.getTitle());
+            story.setAuthor(updatedStory.getAuthor());
+            story.setNarrative(updatedStory.getNarrative());
+            // keep publishedDt as is or update here if you want
+            return storyRepository.save(story);
+        }).orElse(null);
     }
 
+    // DELETE a story
     @DeleteMapping("/{id}")
     public void deleteStory(@PathVariable Long id) {
         storyRepository.deleteById(id);
