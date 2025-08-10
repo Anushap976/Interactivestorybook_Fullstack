@@ -22,7 +22,7 @@ function App() {
             {/* Define routes for Home, About, StoryBook, and Feedback pages */}
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/storybook" element={<StoryBook />} />
+            <Route path="/storybook" element={<ProtectedRoute element={<StoryBook />} />} />
             <Route path="/feedback" element={<ProtectedRoute element={<Feedback />} />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
