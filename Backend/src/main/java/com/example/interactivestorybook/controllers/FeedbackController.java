@@ -6,16 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/api/feedback")
+@RestController // Marks this as a REST API controller
+@RequestMapping("/api/feedback") // Base path for feedback APIs
 public class FeedbackController {
 
-    @Autowired
+    @Autowired // Injects repository instance
     private FeedbackRepository feedbackRepository;
 
-    @PostMapping
-    public ResponseEntity<Feedback> saveFeedback(@RequestBody Feedback feedback) {
-        Feedback savedFeedback = feedbackRepository.save(feedback);
-        return ResponseEntity.ok(savedFeedback);
+    @PostMapping // Handles POST requests
+    public ResponseEntity<Feedback> saveFeedback(@RequestBody Feedback feedback) { // Request body mapped to Feedback
+        Feedback savedFeedback = feedbackRepository.save(feedback); // Save to DB
+        return ResponseEntity.ok(savedFeedback); // Return saved feedback
     }
 }
