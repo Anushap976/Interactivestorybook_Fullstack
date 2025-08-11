@@ -187,7 +187,8 @@
   font-size: 1rem;
   padding: 0.4rem 1rem;
 }
-
+.user-pill { display:inline-flex; align-items:center; }
+.user-name { font-weight:600; white-space:nowrap; }
 .logout-button:hover {
   text-decoration: underline;
 }

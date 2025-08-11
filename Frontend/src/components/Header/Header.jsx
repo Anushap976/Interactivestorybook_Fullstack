@@ -1,37 +1,74 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import './Header.css';
 import loginIcon from '../../assets/login-icon.png';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [displayName, setDisplayName] = useState(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const closeMenu = () => setMenuOpen(false);
 
+  // read auth info from localStorage and derive display name
+  const refreshAuth = () => {
+    try {
+      const rawAuth = localStorage.getItem('authUser'); // { username, firstName?, lastName? }
+      const rawUser = localStorage.getItem('user');      // { email }
+      const auth = rawAuth ? JSON.parse(rawAuth) : null;
+      const fallback = rawUser ? JSON.parse(rawUser) : null;
+
+      const first = (auth?.firstName || '').trim();
+      const last  = (auth?.lastName  || '').trim();
+      const email = (auth?.username || fallback?.email || '').trim();
+
+      const name = (first || last) ? `${first} ${last}`.trim() : email;
+      setDisplayName(name || null);
+      setIsLoggedIn(Boolean(auth || fallback));
+    } catch {
+      setDisplayName(null);
+      setIsLoggedIn(false);
+    }
+  };
+
+  // refresh on mount and whenever the route changes
   useEffect(() => {
-    const user = localStorage.getItem('user');
-    setIsLoggedIn(!!user);
-  }, []);
+    refreshAuth();
+    // also listen to cross-tab changes (optional)
+    const onStorage = (e) => {
+      if (e.key === 'authUser' || e.key === 'user') refreshAuth();
+    };
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname]);
 
   const handleLogout = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('authUser');
     setIsLoggedIn(false);
+    setDisplayName(null);
     navigate('/login');
   };
 
   return (
     <header className="storybook-header">
-      {/* Login icon or Logout button */}
+      {/* Right-side user area */}
       <div className="login-wrapper">
         {isLoggedIn ? (
-          <button className="logout-button" onClick={handleLogout}>
-            Logout
-          </button>
+          <div className="user-pill">
+            {/* You can keep using the same icon as an avatar */}
+            <img src={loginIcon} alt="" className="login-icon" />
+            {displayName && <span className="user-name" style={{ marginLeft: 8 }}>{displayName}</span>}
+            <button className="logout-button" onClick={handleLogout} style={{ marginLeft: 12 }}>
+              Logout
+            </button>
+          </div>
         ) : (
-          <NavLink to="/login" className="login-link">
+          <NavLink to="/login" className="login-link" title="Login">
             <img src={loginIcon} alt="Login" className="login-icon" />
           </NavLink>
         )}
@@ -50,7 +87,6 @@ const Header = () => {
           <li><NavLink to="/storybook" className={({ isActive }) => isActive ? 'active-link' : ''}>StoryBook</NavLink></li>
           <li><NavLink to="/create-story" className={({ isActive }) => isActive ? 'active-link' : ''}>Create Your Story</NavLink></li>
           <li><NavLink to="/feedback" className={({ isActive }) => isActive ? 'active-link' : ''}>Feedback</NavLink></li>
-
         </ul>
       </nav>
 
@@ -62,7 +98,6 @@ const Header = () => {
           <li><NavLink to="/storybook" className={({ isActive }) => isActive ? 'active-link' : ''}>StoryBook</NavLink></li>
           <li><NavLink to="/create-story" className={({ isActive }) => isActive ? 'active-link' : ''}>Create Your Story</NavLink></li>
           <li><NavLink to="/feedback" className={({ isActive }) => isActive ? 'active-link' : ''}>Feedback</NavLink></li>
-
           <li>
             {isLoggedIn ? (
               <button className="logout-button" onClick={handleLogout}>Logout</button>
