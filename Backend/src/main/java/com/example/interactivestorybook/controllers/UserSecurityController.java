@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/user-security")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*") // Allow requests from any origin (CORS)
 public class UserSecurityController {
 
         @Autowired
