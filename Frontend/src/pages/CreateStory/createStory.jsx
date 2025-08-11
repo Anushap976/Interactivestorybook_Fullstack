@@ -26,7 +26,6 @@ const CreateStory = () => {
       const data = await res.json();
       setStories(data);  // Update stories state
     } catch (err) {
-      console.error("Error fetching stories:", err);
       setMessage("Error loading stories.");
     }
   };
@@ -76,7 +75,6 @@ const CreateStory = () => {
       // Refresh stories list
       fetchStories();
     } catch (error) {
-      console.error("Submission error:", error);
       setMessage("There was a problem submitting your story.");
     }
   };
@@ -109,7 +107,6 @@ const CreateStory = () => {
         setNarrative("");
       }
     } catch (error) {
-      console.error("Delete error:", error);
       setMessage("Failed to delete the story.");
     }
   };

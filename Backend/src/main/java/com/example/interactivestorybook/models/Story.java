@@ -65,11 +65,11 @@ public class Story {
         this.publishedDt = publishedDt;
     }
 
-    public List<StoryReview> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<StoryReview> reviews) {
-        this.reviews = reviews;
-    }
+//    public List<StoryReview> getReviews() {
+//        return reviews;
+//    }
+//
+//    public void setReviews(List<StoryReview> reviews) {
+//        this.reviews = reviews;
+//    }
 }

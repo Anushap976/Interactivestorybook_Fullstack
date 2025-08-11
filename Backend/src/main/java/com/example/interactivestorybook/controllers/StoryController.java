@@ -49,6 +49,6 @@ public class StoryController {
     // DELETE a story
     @DeleteMapping("/{id}")
     public void deleteStory(@PathVariable Long id) {// Delete by ID
-         storyRepository.deleteById(id);
+        storyRepository.deleteById(id);
     }
 }
