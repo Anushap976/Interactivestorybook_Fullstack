@@ -21,6 +21,7 @@
   gap: 1rem;
 }
 
+/* Inputs and textarea styling */
 .story-container input,
 .story-container textarea {
   padding: 0.75rem;
@@ -31,6 +32,7 @@
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
+/* Focus styles */
 .story-container input:focus,
 .story-container textarea:focus {
   border-color: #a64ca6; /* medium pinkish purple */
@@ -43,6 +45,7 @@
   min-height: 120px;
 }
 
+/* Submit button styling */
 .story-container button {
   background-color: #a64ca6; /* medium pink-purple */
   color: #fff;
@@ -72,6 +75,7 @@
   list-style: none;
 }
 
+/* Individual story item */
 .story-item {
   background: #fff0ff;
   border: 1px solid #d8b4ff;
@@ -115,7 +119,6 @@
 }
 
 .read-story-text:hover {
-  /* no highlight or color change */
   color: #6a0dad;
   text-decoration: underline;
 }
