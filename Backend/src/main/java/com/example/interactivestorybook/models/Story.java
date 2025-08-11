@@ -5,17 +5,17 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "story")
+@Table(name = "story") // Maps this entity to "story" table
 public class Story {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generates primary key
     private Long storyId;
 
-    private String title;
-    private String author;
+    private String title;  // Title of the story
+    private String author;  // Author name
 
-    @Lob
+    @Lob // Large text field for story content
     private String narrative;
 
     private LocalDate publishedDt;
