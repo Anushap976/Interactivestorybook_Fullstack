@@ -21,8 +21,8 @@ public class User {
     private UserSecurity userSecurity;
 
     // Reviews by this user
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<StoryReview> reviews;
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    private List<StoryReview> reviews;
 
     // Getters and Setters
 
@@ -66,13 +66,13 @@ public class User {
         this.userSecurity = userSecurity;
     }
 
-    public List<StoryReview> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<StoryReview> reviews) {
-        this.reviews = reviews;
-    }
+//    public List<StoryReview> getReviews() {
+//        return reviews;
+//    }
+//
+//    public void setReviews(List<StoryReview> reviews) {
+//        this.reviews = reviews;
+//    }
 
 
 }
