@@ -5,11 +5,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity
+@Entity // Marks this class as a JPA entity mapped to a database table
 public class Feedback {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id  // Primary key
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-increment ID
     private Long id;
 
     private String name;
@@ -19,6 +19,7 @@ public class Feedback {
     // Constructors
     public Feedback() {}
 
+    // Constructor with all fields except ID
     public Feedback(String name, String email, String message) {
         this.name = name;
         this.email = email;
