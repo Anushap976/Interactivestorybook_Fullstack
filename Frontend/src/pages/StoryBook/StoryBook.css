@@ -230,4 +230,62 @@
   .story-body .story-content {
     text-align: left;
   }
+
+  /* Narration buttons container */
+  .narration-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+    flex-wrap: wrap; /* allow buttons to wrap on small screens */
+    padding: 0 1rem; /* some horizontal padding */
+  }
+
+  /* Narration buttons */
+  .narration-buttons button {
+    background: #b47cd0;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(106, 13, 173, 0.2);
+    transition: background-color 0.3s, transform 0.2s;
+    display: inline-block;
+    min-width: 120px; /* keep buttons reasonably sized */
+    white-space: nowrap; /* prevent text wrap inside buttons */
+  }
+
+  /* On hover */
+  .narration-buttons button:hover:not(:disabled) {
+    background: #9c5bb7;
+    transform: scale(1.1);
+  }
+
+  /* Disabled buttons */
+  .narration-buttons button:disabled {
+    background: #e3d4ec;
+    cursor: not-allowed;
+  }
+
+  /* Responsive adjustments for smaller screens */
+  @media screen and (max-width: 480px) {
+    .narration-buttons {
+      gap: 0.6rem;
+      justify-content: center;
+      padding: 0 0.5rem;
+    }
+
+    .narration-buttons button {
+      flex: 1 1 100%; /* make buttons full width */
+      font-size: 1.1rem;
+      padding: 0.9rem 0;
+      min-width: auto;
+      white-space: normal; /* allow text to wrap */
+      box-shadow: none; /* simplify shadow on small screens */
+      border-radius: 8px;
+    }
+  }
+
 }
