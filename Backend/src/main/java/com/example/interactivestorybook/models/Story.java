@@ -20,8 +20,8 @@ public class Story {
 
     private LocalDate publishedDt;
 
-    @OneToMany(mappedBy = "story", cascade = CascadeType.ALL)
-    private List<StoryReview> reviews;
+//    @OneToMany(mappedBy = "story", cascade = CascadeType.ALL)
+//    private List<StoryReview> reviews;
 
     // Getters and Setters below
 
