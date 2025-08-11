@@ -20,9 +20,6 @@ public class Story {
 
     private LocalDate publishedDt;
 
-//    @OneToMany(mappedBy = "story", cascade = CascadeType.ALL)
-//    private List<StoryReview> reviews;
-
     // Getters and Setters below
 
     public Long getStoryId() {
@@ -65,11 +62,4 @@ public class Story {
         this.publishedDt = publishedDt;
     }
 
-//    public List<StoryReview> getReviews() {
-//        return reviews;
-//    }
-//
-//    public void setReviews(List<StoryReview> reviews) {
-//        this.reviews = reviews;
-//    }
 }
