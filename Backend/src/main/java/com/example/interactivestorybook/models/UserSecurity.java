@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class UserSecurity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generated ID
     private Long securityId;
 
     @Column(nullable = false)
